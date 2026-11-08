@@ -1,0 +1,53 @@
+{
+  "$schema": "https://apps.bridgething.com/schemas/catalog/v1.json",
+  "schema": "catalog.v1",
+  "updated_at": "2026-11-08T01:04:02.945Z",
+  "repo": {
+    "name": "Nimbus",
+    "description": "A calm, animated weather app for the Spotify Car Thing.",
+    "homepage": "https://github.com/dharmapoudel/bridgething-nimbus",
+    "icon": null
+  },
+  "apps": [
+    {
+      "id": "01a1b8ad-5cca-7204-b4cd-a13d3d93a72c",
+      "name": "Nimbus",
+      "description": "A calm, animated weather app for the Car Thing: now, hourly, 7-day, details and saved places.",
+      "author": "Dharma Poudel",
+      "icon": "https://dharmapoudel.github.io/bridgething-nimbus/icons/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c.svg",
+      "screenshots": [
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/1-now.png",
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/2-scrub.png",
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/3-week.png",
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/4-details.png",
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/5-places.png",
+        "https://dharmapoudel.github.io/bridgething-nimbus/screenshots/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/6-rain.png"
+      ],
+      "homepage": "https://github.com/dharmapoudel/bridgething-nimbus",
+      "source": "https://github.com/dharmapoudel/bridgething-nimbus",
+      "versions": [
+        {
+          "version": "1.0.2",
+          "released_at": "2026-11-08T01:04:02.941Z",
+          "download": {
+            "url": "https://dharmapoudel.github.io/bridgething-nimbus/r/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/1.0.2.zip",
+            "size": 1227779,
+            "sha256": "411a7fe02bb564743541d8536a4a4ade03bfe4460bd81dbf7eb398454977ae4f"
+          },
+          "settings": {
+            "url": "https://dharmapoudel.github.io/bridgething-nimbus/s/01a1b8ad-5cca-7204-b4cd-a13d3d93a72c/1.0.2.html",
+            "size": 29274,
+            "sha256": "6c91528442e38df172fa12fb39da5036b4f29119b4f7fdae7ed60a20b8f11548"
+          },
+          "permissions": [
+            "net.fetch",
+            "geo"
+          ],
+          "min_libbridgething_version": "0.12.1",
+          "changelog": "- Initial store release.\n- Now, Week, Details and Places screens: big serif temperature, next hours,\n  8-day forecast with a temperature curve, and saved places with their own\n  sky, local time and temperature.\n- Animated sky backdrops that follow the weather and time of day, with rain,\n  snow, stars, mist and lightning on a single canvas.\n- Forecasts from Open-Meteo (free, no API key), current location from the\n  phone's GPS, saved cities from the companion settings page.\n- Knob scrubs through the next 24 hours on Now; top button refreshes."
+        }
+      ]
+    }
+  ],
+  "recommended_sources": []
+}
