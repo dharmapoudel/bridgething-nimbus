@@ -1,0 +1,453 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: block;
+  src: url("./fonts/Newsreader-Variable.ttf") format("truetype-variations");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("./fonts/Inter-Variable.ttf") format("truetype-variations");
+}
+
+@theme {
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.16);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.serif-temp {
+  font-family: var(--font-serif);
+  font-variation-settings: "opsz" 72;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+}
+
+/* --------------------------------------------------------------- sky */
+
+.sky-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 1.4s var(--ease-out-soft);
+}
+
+.sky-photo {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center;
+  /* the photo is already blurred; this smooths the upscale */
+  filter: blur(6px) saturate(1.08);
+  animation: sky-breathe 46s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes sky-breathe {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+.legibility {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.06) 45%, transparent 70%),
+    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.14) 100%);
+}
+
+.sky-glow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  transform: translate(-50%, -50%);
+  animation: glow-drift 18s ease-in-out infinite alternate;
+  transition:
+    left 2s var(--ease-out-soft),
+    top 2s var(--ease-out-soft),
+    background 1.4s;
+  will-change: transform;
+}
+
+@keyframes glow-drift {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-46%, -53%) scale(1.12);
+  }
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.9'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 30% 20%, transparent 55%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+/* --------------------------------------------------------------- weather glyphs */
+
+.wx-rays,
+.wx-glow,
+.wx-drift,
+.wx-drift-rev,
+.wx-fog {
+  transform-box: view-box;
+  transform-origin: 32px 32px;
+}
+.wx-drop,
+.wx-flake,
+.wx-twinkle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.wx-rays {
+  animation: wx-spin 40s linear infinite;
+}
+.wx-glow {
+  animation: wx-pulse 5s ease-in-out infinite;
+}
+.wx-drift {
+  animation: wx-drift 6s ease-in-out infinite alternate;
+}
+.wx-drift-rev {
+  animation: wx-drift 8s ease-in-out infinite alternate-reverse;
+}
+.wx-drop {
+  animation: wx-drop 0.95s cubic-bezier(0.5, 0, 0.9, 0.6) infinite;
+}
+.wx-flake {
+  animation: wx-flake 3.2s linear infinite;
+}
+.wx-bolt {
+  animation: wx-bolt 4.2s ease-in-out infinite;
+}
+.wx-flash-cloud {
+  opacity: 0;
+  animation: wx-flash 4.2s ease-in-out infinite;
+}
+.wx-fog {
+  animation: wx-fog 5.5s ease-in-out infinite alternate;
+}
+.wx-twinkle {
+  animation: wx-twinkle 3.2s ease-in-out infinite;
+}
+.wx-d2 {
+  animation-delay: -1.8s;
+}
+
+.wx-still *,
+.reduced .wx * {
+  animation: none !important;
+}
+.wx-still .wx-flash-cloud,
+.reduced .wx .wx-flash-cloud {
+  opacity: 0;
+}
+
+@keyframes wx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes wx-pulse {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+@keyframes wx-drift {
+  from {
+    transform: translateX(-1.8px);
+  }
+  to {
+    transform: translateX(2px);
+  }
+}
+@keyframes wx-drop {
+  0% {
+    transform: translateY(-6px) scale(0.6);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(9px) scale(0.9, 1.1);
+    opacity: 0;
+  }
+}
+@keyframes wx-flake {
+  0% {
+    transform: translate(0, -7px) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(2.2px, 0) rotate(90deg);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-1px, 8px) rotate(180deg);
+    opacity: 0;
+  }
+}
+@keyframes wx-bolt {
+  0%,
+  56%,
+  64%,
+  76%,
+  100% {
+    opacity: 0.55;
+  }
+  58%,
+  62%,
+  68%,
+  72% {
+    opacity: 1;
+  }
+}
+@keyframes wx-flash {
+  0%,
+  56%,
+  64%,
+  76%,
+  100% {
+    opacity: 0;
+  }
+  58%,
+  68% {
+    opacity: 0.55;
+  }
+  62%,
+  72% {
+    opacity: 0.2;
+  }
+}
+@keyframes wx-fog {
+  from {
+    transform: translateX(-3.5px);
+  }
+  to {
+    transform: translateX(4px);
+  }
+}
+@keyframes wx-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.65);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------- motion helpers */
+
+.rise {
+  animation: rise 0.7s var(--ease-out-soft) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease both;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.pop-in {
+  animation: pop-in 0.55s var(--ease-spring) both;
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+}
+
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 0.9s var(--ease-out-soft) both;
+}
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.view-enter-right {
+  animation: view-right 0.55s var(--ease-out-soft) both;
+}
+.view-enter-left {
+  animation: view-left 0.55s var(--ease-out-soft) both;
+}
+@keyframes view-right {
+  from {
+    opacity: 0;
+    transform: translateX(46px);
+  }
+}
+@keyframes view-left {
+  from {
+    opacity: 0;
+    transform: translateX(-46px);
+  }
+}
+
+.place-enter-next {
+  animation: place-next 0.6s var(--ease-out-soft) both;
+}
+.place-enter-prev {
+  animation: place-prev 0.6s var(--ease-out-soft) both;
+}
+@keyframes place-next {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+  }
+}
+@keyframes place-prev {
+  from {
+    opacity: 0;
+    transform: translateY(-26px);
+    filter: blur(6px);
+  }
+}
+
+.digit-roll {
+  display: inline-block;
+  animation: digit-roll 0.5s var(--ease-out-soft) both;
+}
+.digit-roll.down {
+  animation-name: digit-roll-down;
+}
+@keyframes digit-roll {
+  from {
+    opacity: 0;
+    transform: translateY(0.32em);
+  }
+}
+@keyframes digit-roll-down {
+  from {
+    opacity: 0;
+    transform: translateY(-0.32em);
+  }
+}
+
+.spin {
+  animation: wx-spin 0.9s linear infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.22) 50%, rgba(255, 255, 255, 0.08) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.draw-line {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 1.3s var(--ease-out-soft) forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.reduced *,
+.reduced *::before,
+.reduced *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "01a1b8ad-5cca-7204-b4cd-a13d3d93a72c",
+  "name": "Nimbus",
+  "version": "1.0.2",
+  "description": "A calm, animated weather app for the Car Thing: now, hourly, 7-day, details and saved places.",
+  "icon": "icon.svg",
+  "settings": "settings.html",
+  "config": [
+    {
+      "type": "enum",
+      "data": {
+        "key": "units",
+        "label": "Units",
+        "choices": ["imperial", "metric"],
+        "default": "imperial"
+      }
+    },
+    {
+      "type": "enum",
+      "data": {
+        "key": "clock",
+        "label": "Clock",
+        "choices": ["12h", "24h"],
+        "default": "12h"
+      }
+    },
+    {
+      "type": "enum",
+      "data": {
+        "key": "use_gps",
+        "label": "Include your phone's current location",
+        "choices": ["on", "off"],
+        "default": "on"
+      }
+    },
+    {
+      "type": "string",
+      "data": {
+        "key": "places",
+        "label": "Saved places (managed by the settings page)",
+        "maxLength": 2000,
+        "default": null
+      }
+    }
+  ],
+  "permissions": ["net.fetch", "geo"]
+}
